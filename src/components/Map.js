@@ -73,7 +73,7 @@ export default class MarkerMap extends Component {
     return (
       <Map
         googleMapURL={"https://maps.googleapis.com/maps/api/js?key=" + API_KEY}
-        loadingElement={<div style={{ height: `100%` }} >Cargando!</div>}
+        loadingElement={<div style={{ height: `100%` }} >Cargando el mapa!</div>}
         containerElement={<div id="mapMarkers" style={{ height: `500px`, paddingTop: "20px" }} />}
         mapElement={<div style={{ height: `100%` }} />}
         markers={this.props.markers}

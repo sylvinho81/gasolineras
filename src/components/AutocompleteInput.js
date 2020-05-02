@@ -18,15 +18,18 @@ class Autocomplete extends Component {
       // Whether or not the suggestion list is shown
       showSuggestions: false,
       // What the user has entered
-      userInput: "",
-      clickedAutocompleteOption: false
+      userInput: ""
     };
   }
 
   // Event fired when the input value is changed
   _onChange = e => {
     const userInput = e.target.value;
-    this.setState({userInput: userInput})
+    console.log("_onChange " + userInput)
+    this.setState({
+      userInput: userInput
+    });
+
     if (userInput.length > 3) {
       fetch(`${URL_API_AUTOCOMPLETE}?q=${userInput}`)
         .then(res => res.json())
@@ -34,9 +37,7 @@ class Autocomplete extends Component {
           this.setState({
             activeSuggestion: 0,
             filteredSuggestions: results.suggestions,
-            showSuggestions: true,
-            userInput: userInput,
-            clickedAutocompleteOption: false
+            showSuggestions: true
           });
         })
     }
@@ -51,8 +52,7 @@ class Autocomplete extends Component {
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
-      userInput: seletectInput,
-      clickedAutocompleteOption: true
+      userInput: seletectInput
     });
     this.props.onInput(seletectInput)
   };
