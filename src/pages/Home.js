@@ -9,6 +9,8 @@ import {Config} from '../configuration'
 
 const URL_API_INDEX = Config.apiIndexUrl
 const URL_API_SEARCH = Config.apiSearchUrl
+const LATITUDE_MADRID = Config.latMadrid
+const LONGITUDE_MADRID= Config.longMadrid
 
 export class Home extends Component {
   constructor(props) {
@@ -46,7 +48,9 @@ export class Home extends Component {
     console.log("_renderResults " + this.state.latitude)
     console.log("_renderResults " + this.state.longitude)
     return this.state.results.length === 0
-      ? <div><p>Lo sentimos! No se encontraron resultados!</p></div>
+      ? <div>
+          <p>Lo sentimos! No se encontraron resultados!</p>
+        </div>
       :
        <div>
        <GasStationMap
@@ -120,17 +124,30 @@ export class Home extends Component {
 
   };
 
+  show_pos = (position) => {
+    console.log(position.coords.latitude, position.coords.longitude);
+    var lat = position.coords.latitude
+    var long = position.coords.longitude
+    if ((lat.isNaN && long.isNaN) || (lat !== "NaN" && long !== "NaN")){
+      console.log("browser")
+      localStorage.setItem('lat', lat)
+      localStorage.setItem('long', long)
+    } else {
+      console.log("default")
+      localStorage.setItem('lat', LATITUDE_MADRID)
+      localStorage.setItem('long', LONGITUDE_MADRID)
+    }
+    this._searchByCoordinates(localStorage.getItem('lat'), localStorage.getItem('long'), this.state.currentPageNumber)
+  }
+
+  error_pos = () => {
+    console.log("error geolocation")
+  }
 
   componentDidMount() {
-    console.log("componentDidMount")
     if (navigator.geolocation && this.state.results.length === 0 && this.state.initialLoaded === false){
-      navigator.geolocation.getCurrentPosition(function(position){
-        var lat = position.coords.latitude
-        var long = position.coords.longitude
-        localStorage.setItem('lat', lat)
-        localStorage.setItem('long', long)
-      })
-      this._searchByCoordinates(localStorage.getItem('lat'), localStorage.getItem('long'), this.state.currentPageNumber)
+      var geoOptions = { enableHighAccuracy:true, maximumAge : 300000 }
+      navigator.geolocation.getCurrentPosition(this.show_pos, this.error_pos, geoOptions)
     }
   }
 
@@ -145,7 +162,10 @@ export class Home extends Component {
             ? <div>
                 {this._renderResults()}
               </div>
-            : <div><small>Realiza una nueva búsqueda</small></div>
+            : <div>
+                <p>Realiza una nueva búsqueda</p>
+                <b>(Recuerde dar acceso a su localización en el navegador para obtener resultados cerca del lugar donde se encuentre)</b>
+              </div>
           }
         </div>
       </div>
