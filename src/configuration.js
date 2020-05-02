@@ -1,8 +1,8 @@
 export const Config = {
-  apiIndexUrl: 'https://gasolineras-spain-api.herokuapp.com/gas_stations',
-  apiSearchUrl: 'https://gasolineras-spain-api.herokuapp.com/gas_stations/search',
-  apiAutocompleteUrl: 'https://gasolineras-spain-api.herokuapp.com/gas_stations/autocomplete',
-  apiKey: "AIzaSyBqwOPZmXqQK-FTD-TZWPuDF_NfJErJbOk",
+  apiIndexUrl: process.env.API_INDEX_URL,
+  apiSearchUrl: process.env.API_SEARCH_URL,
+  apiAutocompleteUrl: process.env.API_AUTOCOMPLETE_URL,
+  apiKey: process.env.API_KEY,
   latMadrid: 40.416729,
   longMadrid: -3.703339
 };
