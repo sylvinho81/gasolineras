@@ -163,3 +163,8 @@
 .suggestions li:not(:last-of-type) {
   border-bottom: 1px solid #337ab7;
 }
+
+
+.spinner{
+  padding-top: 50px
+}

@@ -5,6 +5,8 @@ import {MenuHeader} from '../components/MenuHeader'
 import ReactPaginate from 'react-paginate';
 import {GasStationMap} from '../components/GasStationsMap'
 import {Config} from '../configuration'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from 'react-loader-spinner'
 
 
 const URL_API_INDEX = Config.apiIndexUrl
@@ -142,6 +144,9 @@ export class Home extends Component {
 
   error_pos = () => {
     console.log("error geolocation")
+    alert("Recuerda dar permisos de localización en tu ordenador. De lo contrario se mostrarán por defecto las gasolineras de Madrid")
+    this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+
   }
 
   componentDidMount() {
@@ -162,9 +167,15 @@ export class Home extends Component {
             ? <div>
                 {this._renderResults()}
               </div>
-            : <div>
-                <p>Realiza una nueva búsqueda</p>
-                <b>(Recuerde dar acceso a su localización en el navegador para obtener resultados cerca del lugar donde se encuentre)</b>
+            : <div className="spinner">
+                <Loader
+                   type="Puff"
+                   color="#00BFFF"
+                   height={100}
+                   width={100}
+                   timeout={5000} //3 secs
+
+                />
               </div>
           }
         </div>
