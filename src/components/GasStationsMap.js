@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api'
-
+import pin7 from '../assets/pin7.png'
 import {ImageGasStation} from './ImageGasStation'
 import {Config} from '../configuration'
 
@@ -69,7 +69,7 @@ export class GasStationMap extends Component {
              <Marker
                key={marker.ideess}
                position={{ lat: marker.latitude, lng: marker.longitude }}
-               options={{ icon: { url: "http://cdn.webiconset.com/map-icons/images/pin7.png"}}}
+               options={{ icon: { url: pin7}}}
                onClick={() => {
                   this.setSelectedCenter(marker);
                }}
