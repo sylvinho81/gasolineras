@@ -5,7 +5,7 @@ You can filter by address, city, etc if you want to see the prices of the gas st
 
 ## Requirements
 
-This project was developed in order to use the next REST API. Please take a look here:
+This project was developed in order to use the next REST API. Please take a look here: https://github.com/sylvinho81/gasolineras-api
 
 ## Configuration
 
