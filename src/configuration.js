@@ -5,4 +5,5 @@ export const Config = {
   apiKey: "AIzaSyBqwOPZmXqQK-FTD-TZWPuDF_NfJErJbOk",
   latMadrid: 40.416729,
   longMadrid: -3.703339
+
 };
