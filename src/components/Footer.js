@@ -7,7 +7,7 @@ export class Footer extends Component {
   render () {
 
     return (
-      <footer id="sticky-footer" className="py-4 bg-dark text-white-50">
+      <footer id="footer" className="py-4 bg-dark text-white-50">
         <div className="container">
           Fuente: <a rel="noopener" href={to}>{font}</a>
         </div>

@@ -152,8 +152,8 @@ export class Home extends Component {
   render (){
     console.log("render")
     return (
-      <div className="App">
-        <div id="page-content">
+      <div className="App page-container">
+        <div id="content-wrap">
           <MenuHeader />
           <div className="container" style={{"paddingTop": "20px"}}>
             <SearchForm onResults={this._handleResults}/>
@@ -173,6 +173,7 @@ export class Home extends Component {
                 </div>
             }
           </div>
+
         </div>
         <Footer/>
       </div>
