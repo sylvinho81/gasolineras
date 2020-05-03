@@ -51,7 +51,6 @@ export class GasStationMap extends Component {
   //}
 
   render() {
-    console.log(this.state.centerMap)
      return (
       <LoadScript
         id="script-loader"

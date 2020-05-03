@@ -18,17 +18,16 @@ class Autocomplete extends Component {
       // Whether or not the suggestion list is shown
       showSuggestions: false,
       // What the user has entered
-      userInput: ""
+      userInput: "",
+      // Coordinates [latitude,longitude] for each of the suggestions in filteredSuggestions
+      coordinates: []
     };
   }
 
   // Event fired when the input value is changed
   _onChange = e => {
     const userInput = e.target.value;
-    console.log("_onChange " + userInput)
-    this.setState({
-      userInput: userInput
-    });
+    this.setState({userInput: userInput});
 
     if (userInput.length > 3) {
       fetch(`${URL_API_AUTOCOMPLETE}?q=${userInput}`)
@@ -37,12 +36,23 @@ class Autocomplete extends Component {
           this.setState({
             activeSuggestion: 0,
             filteredSuggestions: results.suggestions,
-            showSuggestions: true
+            showSuggestions: true,
+            coordinates: results.coordinates
           });
         })
     }
-    this.props.onInput(userInput)
+    this.props.onInput({inputSearch: userInput, latitude: 0, longitude: 0})
   };
+
+
+  getIndex(value, arr) {
+    for(var i = 0; i < arr.length; i++) {
+        if(arr[i] === value) {
+            return i;
+        }
+    }
+    return -1; //to handle the case where the value doesn't exist
+  }
 
   // Event fired when the user clicks on a suggestion
   _onClick = e => {
@@ -51,10 +61,18 @@ class Autocomplete extends Component {
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions: [],
+      coordinates: [],
       showSuggestions: false,
       userInput: seletectInput
     });
-    this.props.onInput(seletectInput)
+
+    var index = this.getIndex(seletectInput, this.state.filteredSuggestions);
+    if (index !== -1){
+      this.props.onInput({inputSearch: seletectInput, latitude: this.state.coordinates[index][0], longitude: this.state.coordinates[index][1]})
+    } else {
+      this.props.onInput({inputSearch: seletectInput, latitude: 0, longitude: 0})
+    }
+
   };
 
 

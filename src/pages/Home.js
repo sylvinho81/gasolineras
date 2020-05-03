@@ -31,8 +31,6 @@ export class Home extends Component {
   }
 
   _handleResults = (results) => {
-    console.log("currentPageNumber" + results.page)
-    console.log("totalPages" + results.pages)
     this.setState({ results: results.gas_stations,
                     usedSearch: true,
                     initialLoaded:  true,
@@ -41,14 +39,22 @@ export class Home extends Component {
                     inputSearch: results.input_search,
                     latitude: parseFloat(results.latitude),
                     longitude: parseFloat(results.longitude),
-                    typeSearch: 'normal'
+                    typeSearch: results.type_search
                   })
   }
 
+  handleClick = (e) => {
+    const selectedPage = e.selected;
+    if (this.state.typeSearch === 'coordinates'){
+      this._searchByCoordinates(this.state.latitude, this.state.longitude, selectedPage)
+    } else {
+      this._searchByText(this.state.inputSearch, selectedPage)
+    }
+
+  };
+
 
   _renderResults () {
-    console.log("_renderResults " + this.state.latitude)
-    console.log("_renderResults " + this.state.longitude)
     return this.state.results.length === 0
       ? <div>
           <p>Lo sentimos! No se encontraron resultados!</p>
@@ -69,6 +75,7 @@ export class Home extends Component {
             marginPagesDisplayed={2}
             pageRangeDisplayed={5}
             onPageChange={this.handleClick}
+            forcePage={this.state.currentPageNumber}
             containerClassName={"pagination"}
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}/>
@@ -76,7 +83,6 @@ export class Home extends Component {
   }
 
   _searchByCoordinates(latitude, longitude, page) {
-    console.log("search by coordinates")
     fetch(`${URL_API_INDEX}?lat=${latitude}&long=${longitude}&page=${page}`)
       .then(res => res.json())
       .then(results => {
@@ -88,13 +94,12 @@ export class Home extends Component {
                         inputSearch: '',
                         latitude: parseFloat(results.latitude),
                         longitude: parseFloat(results.longitude),
-                        typeSearch: 'coordinates'
+                        typeSearch: results.type_search
                       })
       })
   }
 
   _searchByText(inputSearch, page) {
-    console.log("search by text")
     fetch(`${URL_API_SEARCH}?q=${inputSearch}&page=${page}`)
       .then(res => res.json())
       .then(results => {
@@ -106,28 +111,16 @@ export class Home extends Component {
                         inputSearch: results.input_search,
                         latitude: parseFloat(results.latitude),
                         longitude: parseFloat(results.longitude),
-                        typeSearch: 'normal'
+                        typeSearch: results.type_search
                       })
       })
   }
 
 
 
-  handleClick = (e) => {
-    const selectedPage = e.selected;
-    console.log("selectedPage " + selectedPage)
-    console.log("latitude", this.state.latitude)
-    console.log("input search", this.state.inputSearch)
-    if (this.state.typeSearch === 'coordinates'){
-      this._searchByCoordinates(this.state.latitude, this.state.longitude, selectedPage)
-    } else {
-      this._searchByText(this.state.inputSearch, selectedPage)
-    }
 
-  };
 
   show_pos = (position) => {
-    console.log(position.coords.latitude, position.coords.longitude);
     var lat = position.coords.latitude
     var long = position.coords.longitude
     if ((lat.isNaN && long.isNaN) || (lat !== "NaN" && long !== "NaN")){
@@ -173,7 +166,7 @@ export class Home extends Component {
                    color="#00BFFF"
                    height={100}
                    width={100}
-                   timeout={5000} //3 secs
+                   timeout={5000} //5 secs
 
                 />
               </div>

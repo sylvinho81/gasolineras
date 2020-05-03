@@ -30,6 +30,7 @@ export class GasStation extends Component {
         return <li className="list-group-item" key={title_gas[i]}>{title_gas[i]}: - </li>
       }
     })
+    
     return (
         <div key={ideess} className="card" style={{width: "100%"}}>
             <ImageGasStation label={label}/>
