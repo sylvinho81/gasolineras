@@ -7,7 +7,7 @@ import {GasStationMap} from '../components/GasStationsMap'
 import {Config} from '../configuration'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
-
+import {Footer} from '../components/Footer'
 
 const URL_API_INDEX = Config.apiIndexUrl
 const URL_API_SEARCH = Config.apiSearchUrl
@@ -153,26 +153,30 @@ export class Home extends Component {
     console.log("render")
     return (
       <div className="App">
-        <MenuHeader />
-        <div className="container" style={{"paddingTop": "20px"}}>
-          <SearchForm onResults={this._handleResults}/>
-          {this.state.usedSearch
-            ? <div>
-                {this._renderResults()}
-              </div>
-            : <div className="spinner">
-                <Loader
-                   type="Puff"
-                   color="#00BFFF"
-                   height={100}
-                   width={100}
-                   timeout={5000} //5 secs
+        <div id="page-content">
+          <MenuHeader />
+          <div className="container" style={{"paddingTop": "20px"}}>
+            <SearchForm onResults={this._handleResults}/>
+            {this.state.usedSearch
+              ? <div>
+                  {this._renderResults()}
+                </div>
+              : <div className="spinner">
+                  <Loader
+                     type="Puff"
+                     color="#00BFFF"
+                     height={100}
+                     width={100}
+                     timeout={5000} //5 secs
 
-                />
-              </div>
-          }
+                  />
+                </div>
+            }
+          </div>
         </div>
+        <Footer/>
       </div>
+
     )
   }
 

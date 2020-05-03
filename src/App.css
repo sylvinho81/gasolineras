@@ -1,3 +1,8 @@
+html,
+body {
+  height: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -167,4 +172,14 @@
 
 .spinner{
   padding-top: 20%
+}
+
+
+#sticky-footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
 }

@@ -5,6 +5,7 @@ import {ImageGasStation} from './ImageGasStation'
 import {Config} from '../configuration'
 
 const API_KEY = Config.apiKey
+const utils = require("../utils.js")
 
 const _renderInfoWindowScreen = (selectedCenter) => (
   <div id="contentInfoWindow">
@@ -14,6 +15,7 @@ const _renderInfoWindowScreen = (selectedCenter) => (
     <hr/>
     <h5 id="thirdHeading" className="thirdHeading">{selectedCenter.label}</h5>
     <div id="bodyContent">
+     <p><small>Última actualización: {utils.formatDate(selectedCenter.updated_at)}</small></p>
      <p><b>Horario:</b> {selectedCenter.schedule}</p>
      <p>{selectedCenter.address}, {selectedCenter.location}</p>
      <ul className="list-group list-group-flush">

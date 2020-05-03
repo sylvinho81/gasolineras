@@ -24,6 +24,7 @@ export class GasStationsList extends Component {
                   price_diesel_b={gas_station.price_diesel_b}
                   price_gasoline_95_protection={gas_station.price_gasoline_95_protection}
                   price_gasoline_98={gas_station.price_gasoline_98}
+                  updated_at={gas_station.updated_at}
                 />
               </div>
             )
