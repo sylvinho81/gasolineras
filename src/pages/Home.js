@@ -137,7 +137,7 @@ export class Home extends Component {
 
   error_pos = () => {
     console.log("error geolocation")
-    alert("Recuerda dar permisos de localización en tu ordenador. De lo contrario se mostrarán por defecto las gasolineras de Madrid")
+    alert("Recuerda dar permisos de geolocalización en tu dispositivo. De lo contrario se mostrarán por defecto las gasolineras de Madrid")
     this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
 
   }
