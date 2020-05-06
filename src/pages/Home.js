@@ -13,6 +13,7 @@ const URL_API_INDEX = Config.apiIndexUrl
 const URL_API_SEARCH = Config.apiSearchUrl
 const LATITUDE_MADRID = Config.latMadrid
 const LONGITUDE_MADRID= Config.longMadrid
+const API_KEY_GEO = Config.apiKeyGeo
 
 export class Home extends Component {
   constructor(props) {
@@ -117,26 +118,58 @@ export class Home extends Component {
   }
 
 
+  tryAPIGeolocation = () => {
+    fetch("https://api.ipify.org/?format=json")
+       .then(response => response.json())
+       .then(data => {
+         console.log("API IP success" + data.ip)
+         fetch("http://api.ipstack.com/" + data.ip + "?access_key="+ API_KEY_GEO)
+            .then(response => response.json())
+            .then(data => {
+              console.log("API Geolocation success")
+              this._searchByCoordinates(data.latitude, data.longitude, this.state.currentPageNumber)
+            })
+         .catch(err => {
+            console.log("API Geolocation error! \n\n"+err);
+            this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+         });
+       }).catch(err => {
+          console.log("API IP error! \n\n"+err);
+          this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+       });
+
+  }
 
 
 
   show_pos = (position) => {
     var lat = position.coords.latitude
     var long = position.coords.longitude
-    if ((lat.isNaN && long.isNaN) || (lat !== "NaN" && long !== "NaN")){
-      console.log("browser")
-      localStorage.setItem('lat', lat)
-      localStorage.setItem('long', long)
-    } else {
-      console.log("default")
-      localStorage.setItem('lat', LATITUDE_MADRID)
-      localStorage.setItem('long', LONGITUDE_MADRID)
-    }
+    console.log("Browser geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
+    localStorage.setItem('lat', lat)
+    localStorage.setItem('long', long)
     this._searchByCoordinates(localStorage.getItem('lat'), localStorage.getItem('long'), this.state.currentPageNumber)
   }
 
-  error_pos = () => {
-    console.log("error geolocation")
+  error_pos = (error) => {
+    console.log(error.code)
+    console.log(error.TIMEOUT)
+    console.log(error.PERMISSION_DENIED)
+    console.log(error.POSITION_UNAVAILABLE)
+    switch (error.code) {
+      case error.TIMEOUT:
+        console.log("Browser geolocation error !\n\nTimeout.");
+        break;
+      case error.PERMISSION_DENIED:
+        this.tryAPIGeolocation()
+        console.log(error.message)  
+        break;
+      case error.POSITION_UNAVAILABLE:
+        console.log("Browser geolocation error !\n\nPosition unavailable.");
+        break;
+      default:
+
+    }
     alert("Recuerda dar permisos de geolocalización en tu dispositivo. De lo contrario se mostrarán por defecto las gasolineras de Madrid")
     this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
 
@@ -144,7 +177,7 @@ export class Home extends Component {
 
   componentDidMount() {
     if (navigator.geolocation && this.state.results.length === 0 && this.state.initialLoaded === false){
-      var geoOptions = { enableHighAccuracy:true, maximumAge : 300000 }
+      var geoOptions = { enableHighAccuracy:true, maximumAge : 50000, timeout: 20000 }
       navigator.geolocation.getCurrentPosition(this.show_pos, this.error_pos, geoOptions)
     }
   }
