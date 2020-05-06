@@ -162,7 +162,7 @@ export class Home extends Component {
         break;
       case error.PERMISSION_DENIED:
         this.tryAPIGeolocation()
-        console.log(error.message)  
+        console.log(error.message)
         break;
       case error.POSITION_UNAVAILABLE:
         console.log("Browser geolocation error !\n\nPosition unavailable.");
@@ -170,7 +170,7 @@ export class Home extends Component {
       default:
 
     }
-    alert("Recuerda dar permisos de geolocalización en tu dispositivo. De lo contrario se mostrarán por defecto las gasolineras de Madrid")
+    //alert("Recuerda dar permisos de geolocalización en tu dispositivo. De lo contrario se mostrarán por defecto las gasolineras de Madrid")
     this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
 
   }
