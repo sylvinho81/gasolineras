@@ -170,7 +170,8 @@ export class Home extends Component {
         this.tryAPIGeolocation()
         break;
       default:
-
+        this.tryAPIGeolocation()
+        break;
     }
     //alert("Recuerda dar permisos de geolocalización en tu dispositivo. De lo contrario se mostrarán por defecto las gasolineras de Madrid")
 
