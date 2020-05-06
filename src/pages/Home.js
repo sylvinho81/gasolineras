@@ -120,23 +120,23 @@ export class Home extends Component {
 
   tryAPIGeolocation = () => {
     fetch("https://api.ipify.org/?format=json")
-       .then(response => response.json())
-       .then(data => {
-         console.log("API IP success" + data.ip)
-         fetch("http://api.ipstack.com/" + data.ip + "?access_key="+ API_KEY_GEO)
-            .then(response => response.json())
-            .then(data => {
-              console.log("API Geolocation success")
-              this._searchByCoordinates(data.latitude, data.longitude, this.state.currentPageNumber)
-            })
-         .catch(err => {
-            console.log("API Geolocation error! \n\n"+err);
-            this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
-         });
-       }).catch(err => {
-          console.log("API IP error! \n\n"+err);
+     .then(response => response.json())
+     .then(data => {
+       console.log("API IP success" + data.ip)
+       fetch("http://api.ipstack.com/" + data.ip + "?access_key="+ API_KEY_GEO)
+          .then(response => response.json())
+          .then(data => {
+            console.log("API Geolocation success")
+            this._searchByCoordinates(data.latitude, data.longitude, this.state.currentPageNumber)
+          })
+       .catch(err => {
+          console.log("API Geolocation error! \n\n"+err);
           this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
        });
+     }).catch(err => {
+        console.log("API IP error! \n\n"+err);
+        this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+     });
 
   }
 
@@ -158,20 +158,22 @@ export class Home extends Component {
     console.log(error.POSITION_UNAVAILABLE)
     switch (error.code) {
       case error.TIMEOUT:
-        console.log("Browser geolocation error !\n\nTimeout.");
+        console.log(error.message)
+        this.tryAPIGeolocation()
         break;
       case error.PERMISSION_DENIED:
-        this.tryAPIGeolocation()
         console.log(error.message)
+        this.tryAPIGeolocation()
         break;
       case error.POSITION_UNAVAILABLE:
-        console.log("Browser geolocation error !\n\nPosition unavailable.");
+        console.log(error.message)
+        this.tryAPIGeolocation()
         break;
       default:
 
     }
     //alert("Recuerda dar permisos de geolocalización en tu dispositivo. De lo contrario se mostrarán por defecto las gasolineras de Madrid")
-    this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+
 
   }
 
