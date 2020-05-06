@@ -188,10 +188,10 @@ export class Home extends Component {
   render (){
     console.log("render")
     return (
-      <div className="App page-container">
-        <div id="content-wrap">
+      <div className="App d-flex flex-column min-vh-100">
+        <div className="wrapper flex-grow-1">
           <MenuHeader />
-          <div className="container" style={{"paddingTop": "20px"}}>
+          <main className="container" style={{"paddingTop": "20px"}}>
             <SearchForm onResults={this._handleResults}/>
             {this.state.usedSearch
               ? <div>
@@ -208,8 +208,7 @@ export class Home extends Component {
                   />
                 </div>
             }
-          </div>
-
+          </main>
         </div>
         <Footer/>
       </div>

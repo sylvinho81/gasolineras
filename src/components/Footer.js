@@ -7,9 +7,9 @@ export class Footer extends Component {
   render () {
 
     return (
-      <footer id="footer" className="py-4 bg-dark text-white-50">
+      <footer id="footer" className="footer">
         <div className="container">
-          Fuente: <a rel="noopener" href={to}>{font}</a>
+          <span className="text-muted">Fuente: <a rel="noopener" href={to}>{font}</a></span>
         </div>
       </footer>
     )

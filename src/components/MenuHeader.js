@@ -7,7 +7,7 @@ export class MenuHeader extends Component {
 
     return (
       <header>
-        <Navbar expand="lg" variant="dark" bg="dark">
+        <Navbar expand="lg" variant="dark" bg="dark" navbar-fixed-top>
           <Navbar.Brand>Precios Gasolineras</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
