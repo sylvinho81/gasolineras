@@ -191,3 +191,7 @@ body {
 body > .container {
   padding: 60px 15px 0;
 }
+
+small.last_update{
+  font-size: 75% !important;
+}

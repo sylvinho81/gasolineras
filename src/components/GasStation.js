@@ -39,7 +39,7 @@ export class GasStation extends Component {
             <ImageGasStation label={label}/>
             <div className="card-body">
               <h5 className="card-title">{label}</h5>
-              <small>Última actualización: {utils.formatDate(updated_at)}</small>
+              <small className="last_update">Última actualización: {utils.formatDate(updated_at)}</small>
               <p className="card-text">{this._formatAddress(address)}</p>
               <ul className="list-group list-group-flush">{listItems}</ul>
             </div>
