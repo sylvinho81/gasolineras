@@ -29,6 +29,7 @@ export class Home extends Component {
               typeSearch: 'normal'
 
     };
+    this.containerRef = React.createRef()
   }
 
   _handleResults = (results) => {
@@ -61,25 +62,25 @@ export class Home extends Component {
           <p>Lo sentimos! No se encontraron resultados!</p>
         </div>
       :
-       <div>
-       <GasStationMap
-         markers={this.state.results}
-         center={{lat: this.state.latitude, lng: this.state.longitude}}
-        />
-        <GasStationsList gas_stations={this.state.results} />
-        <ReactPaginate
-            previousLabel={"<<"}
-            nextLabel={">>"}
-            breakLabel={"..."}
-            breakClassName={"break-me"}
-            pageCount={this.state.totalPages}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={this.handleClick}
-            forcePage={this.state.currentPageNumber}
-            containerClassName={"pagination"}
-            subContainerClassName={"pages pagination"}
-            activeClassName={"active"}/>
+       <div ref={this.containerRef}>
+         <GasStationMap
+           markers={this.state.results}
+           center={{lat: this.state.latitude, lng: this.state.longitude}}
+          />
+          <GasStationsList gas_stations={this.state.results} />
+          <ReactPaginate
+              previousLabel={"<<"}
+              nextLabel={">>"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={this.state.totalPages}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.handleClick}
+              forcePage={this.state.currentPageNumber}
+              containerClassName={"pagination"}
+              subContainerClassName={"pages pagination"}
+              activeClassName={"active"}/>
       </div>
   }
 
@@ -126,7 +127,7 @@ export class Home extends Component {
        fetch("http://api.ipstack.com/" + data.ip + "?access_key="+ API_KEY_GEO)
           .then(response => response.json())
           .then(data => {
-            console.log("API Geolocation success")
+            console.log("API Geolocation success " + data.latitude + " " + data.longitude)
             this._searchByCoordinates(data.latitude, data.longitude, this.state.currentPageNumber)
           })
        .catch(err => {
@@ -178,12 +179,22 @@ export class Home extends Component {
 
   }
 
+  scrollToContainerRef = () => window.scrollTo(0, this.containerRef.offsetTop)
+
   componentDidMount() {
     if (navigator.geolocation && this.state.results.length === 0 && this.state.initialLoaded === false){
       var geoOptions = { enableHighAccuracy:true, maximumAge : 50000, timeout: 20000 }
       navigator.geolocation.getCurrentPosition(this.show_pos, this.error_pos, geoOptions)
     }
+
   }
+
+
+  componentDidUpdate(){
+    this.scrollToContainerRef()
+  }
+
+
 
   render (){
     console.log("render")
