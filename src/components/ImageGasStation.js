@@ -18,6 +18,7 @@ import saras from '../assets/saras.png'
 import avia from '../assets/avia.jpg'
 import carbugal from '../assets/carbugal.png'
 import easygas from '../assets/easygas.jpg'
+import petroprix from '../assets/petroprix.png'
 
 export class ImageGasStation extends Component {
   static propTypes = {
@@ -59,7 +60,9 @@ export class ImageGasStation extends Component {
       case /carbugal/.test(label):
         return carbugal;
       case /easygas/.test(label):
-        return easygas;             
+        return easygas;
+      case /petroprix/.test(label):
+        return petroprix;
       default:
         return no_image;
     }
