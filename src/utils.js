@@ -3,7 +3,7 @@ var formatDate = function(string) {
     minute:'2-digit', timeZone: "Europe/Madrid" };
   var spainTime = new Date(string).toLocaleString('es-ES',options);
   var d = new Date(spainTime);
-  return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+  return d.toLocaleString();
 }
 
 exports.formatDate = formatDate;
