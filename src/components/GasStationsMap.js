@@ -34,12 +34,22 @@ export class GasStationMap extends Component {
   state = {
     selectedCenter: null,
     centerMap: this.props.center,
-    markers: this.props.markers
+    markers: this.props.markers,
+    map: {}
   }
-
 
   setSelectedCenter(marker) {
     this.setState({selectedCenter: marker})
+  }
+
+  boundsCallBack = () => {
+    const {map} = this.state;
+    console.log('lat: ', map.getCenter().lat())
+    console.log('lng: ', map.getCenter().lng())
+  }
+
+  handleMapLoad = (map) => {
+    this.setState({map: map});
   }
 
   static getDerivedStateFromProps(props, state){
@@ -64,6 +74,8 @@ export class GasStationMap extends Component {
           center={this.state.centerMap}
           mapContainerClassName={"containerMap"}
           mapContainerStyle={{ height: `100%` }}
+          onDragEnd={this.boundsCallBack}
+          onLoad={this.handleMapLoad}
         >
         {this.state.markers.map(marker => {
            return (
