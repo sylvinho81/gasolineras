@@ -19,6 +19,7 @@ import avia from '../assets/avia.jpg'
 import carbugal from '../assets/carbugal.png'
 import easygas from '../assets/easygas.jpg'
 import petroprix from '../assets/petroprix.png'
+import ortegal_oil from '../assets/ortegal_oil.png'
 
 export class ImageGasStation extends Component {
   static propTypes = {
@@ -63,6 +64,8 @@ export class ImageGasStation extends Component {
         return easygas;
       case /petroprix/.test(label):
         return petroprix;
+      case /ortegal oil/.test(label):
+        return ortegal_oil;  
       default:
         return no_image;
     }
