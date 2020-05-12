@@ -120,24 +120,25 @@ export class Home extends Component {
 
 
   tryAPIGeolocation = () => {
-    fetch("https://api.ipify.org/?format=json")
-     .then(response => response.json())
-     .then(data => {
-       console.log("API IP success" + data.ip)
-       fetch("http://api.ipstack.com/" + data.ip + "?access_key="+ API_KEY_GEO)
-          .then(response => response.json())
-          .then(data => {
-            console.log("API Geolocation success " + data.latitude + " " + data.longitude)
-            this._searchByCoordinates(data.latitude, data.longitude, this.state.currentPageNumber)
-          })
-       .catch(err => {
-          console.log("API Geolocation error! \n\n"+err);
-          this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
-       });
-     }).catch(err => {
-        console.log("API IP error! \n\n"+err);
-        this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
-     });
+    this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+    // fetch("https://api.ipify.org/?format=json")
+    //  .then(response => response.json())
+    //  .then(data => {
+    //    console.log("API IP success" + data.ip)
+    //    fetch("http://api.ipstack.com/" + data.ip + "?access_key="+ API_KEY_GEO)
+    //       .then(response => response.json())
+    //       .then(data => {
+    //         console.log("API Geolocation success " + data.latitude + " " + data.longitude)
+    //         this._searchByCoordinates(data.latitude, data.longitude, this.state.currentPageNumber)
+    //       })
+    //    .catch(err => {
+    //       console.log("API Geolocation error! \n\n"+err);
+    //       this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+    //    });
+    //  }).catch(err => {
+    //     console.log("API IP error! \n\n"+err);
+    //     this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+    //  });
 
   }
 
