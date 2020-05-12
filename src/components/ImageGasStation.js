@@ -20,6 +20,10 @@ import carbugal from '../assets/carbugal.png'
 import easygas from '../assets/easygas.jpg'
 import petroprix from '../assets/petroprix.png'
 import ortegal_oil from '../assets/ortegal_oil.png'
+import plenoil from '../assets/plenoil.png'
+import beroil from '../assets/beroil.jpg'
+import galioil from '../assets/galioil.png'
+import nuroil from '../assets/nuroil.jpg'
 
 export class ImageGasStation extends Component {
   static propTypes = {
@@ -65,7 +69,15 @@ export class ImageGasStation extends Component {
       case /petroprix/.test(label):
         return petroprix;
       case /ortegal oil/.test(label):
-        return ortegal_oil;  
+        return ortegal_oil;
+      case /plenoil/.test(label):
+        return plenoil;
+      case /beroil/.test(label):
+        return beroil;
+      case /galioil/.test(label):
+        return galioil;
+      case /nuroil/.test(label):
+        return nuroil;
       default:
         return no_image;
     }
