@@ -24,6 +24,7 @@ import plenoil from '../assets/plenoil.png'
 import beroil from '../assets/beroil.jpg'
 import galioil from '../assets/galioil.png'
 import nuroil from '../assets/nuroil.jpg'
+import norpetrol from '../assets/norpetrol.png'
 
 export class ImageGasStation extends Component {
   static propTypes = {
@@ -78,6 +79,8 @@ export class ImageGasStation extends Component {
         return galioil;
       case /nuroil/.test(label):
         return nuroil;
+      case /norpetrol/.test(label):
+        return norpetrol;
       default:
         return no_image;
     }
