@@ -2,9 +2,22 @@ import React from 'react'
 import { ButtonBackToHome } from '../components/ButtonBackToHome'
 
 export const NotFound = () => (
-  <div>
-    <h1 className='title'>404!</h1>
-    <h2 className='subtitle'>No existe la página</h2>
-    <ButtonBackToHome />
-  </div>
+  <div className="container">
+    <div className="row">
+        <div className="col-md-12">
+            <div className="error-template">
+                <h1>
+                    Oops!</h1>
+                <h2>
+                    Página no encontrada</h2>
+                <div className="error-details">
+                    Lo sentimos, pero parece que la página que buscas no existe
+                </div>
+                <div className="error-actions">
+                    <ButtonBackToHome/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 )
