@@ -39,7 +39,7 @@ export class Detail extends Component {
 
   componentDidUpdate() {
     document.title = `Precios carburantes en la Gasolinera ${this.state.gas_station.label} de ${this.state.gas_station.location}`
-    document.description = `Gasolinera ${this.state.gas_station.label} de ${this.state.gas_station.location}. Esta gasolinera se encuentra en la localidad de ${this.state.gas_station.location}, en el municipio de ${this.state.gas_station.municipality} perteneciente a la provincia de ${this.state.gas_station.province}`
+    document.getElementsByTagName("META")[2].content = `Gasolinera ${this.state.gas_station.label} de ${this.state.gas_station.location}. Esta gasolinera se encuentra en la localidad de ${this.state.gas_station.location}, en el municipio de ${this.state.gas_station.municipality} perteneciente a la provincia de ${this.state.gas_station.province}`
   }
 
   render () {
