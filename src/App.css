@@ -201,7 +201,7 @@ small.last_update{
   text-decoration: inherit; /* no underline */
 }
 .GasStationsList-item a:hover {
-  color: grey;
+  background-color: rgba(255,255,255,0.5);
 }
 
 .back-button {
