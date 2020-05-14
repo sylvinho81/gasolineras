@@ -11,7 +11,7 @@ function App() {
   return (
     <Switch>
       <Route exact path='/' component={Home} />
-      <Route exact path='/:label-en-:location-:ideess' component={Detail} />
+      <Route exact path='/:label-en-:location-:ideess(\d+)' component={Detail} />
       <Route exact path='/gasolineras-en-:province' component={Province} />
       <Route component={NotFound} />
     </Switch>
