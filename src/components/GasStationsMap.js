@@ -34,7 +34,8 @@ export class GasStationMap extends Component {
   state = {
     selectedCenter: null,
     centerMap: this.props.center,
-    markers: this.props.markers
+    markers: this.props.markers,
+    zoom: this.props.zoom
   }
 
 
@@ -60,7 +61,7 @@ export class GasStationMap extends Component {
       >
         <GoogleMap
           key={"mapp"}
-          zoom={12}
+          zoom={this.state.zoom}
           center={this.state.centerMap}
           mapContainerClassName={"containerMap"}
           mapContainerStyle={{ height: `100%` }}

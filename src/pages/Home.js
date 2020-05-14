@@ -13,7 +13,7 @@ const URL_API_INDEX = Config.apiIndexUrl
 const URL_API_SEARCH = Config.apiSearchUrl
 const LATITUDE_MADRID = Config.latMadrid
 const LONGITUDE_MADRID= Config.longMadrid
-const API_KEY_GEO = Config.apiKeyGeo
+//const API_KEY_GEO = Config.apiKeyGeo
 
 export class Home extends Component {
   constructor(props) {
@@ -66,6 +66,7 @@ export class Home extends Component {
          <GasStationMap
            markers={this.state.results}
            center={{lat: this.state.latitude, lng: this.state.longitude}}
+           zoom={12}
           />
           <GasStationsList gas_stations={this.state.results} />
           <ReactPaginate

@@ -195,3 +195,8 @@ body > .container {
 small.last_update{
   font-size: 75% !important;
 }
+
+.GasStationsList-item a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
