@@ -200,3 +200,8 @@ small.last_update{
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
 }
+
+.back-button {
+    text-align: center;
+    padding-bottom: 2em;
+}
