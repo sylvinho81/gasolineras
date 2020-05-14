@@ -7,6 +7,7 @@ import {Footer} from '../components/Footer'
 import {Config} from '../configuration'
 import {GasStationsList} from '../components/GasStationsList'
 import ReactPaginate from 'react-paginate';
+import Loader from 'react-loader-spinner'
 
 const URL_API_PROVINCE = Config.apiProvinceUrl
 
@@ -57,7 +58,10 @@ export class Province extends Component {
           <p>Lo sentimos! No se encontraron resultados!</p>
         </div>
       :
+
        <div ref={this.containerRef}>
+           <h1 className="my-4">Gasolineras en {this.state.province.toUpperCase()}
+           </h1>
           <GasStationsList gas_stations={this.state.results} />
           <ReactPaginate
               previousLabel={"<<"}
@@ -98,11 +102,23 @@ export class Province extends Component {
         <div className="wrapper flex-grow-1">
           <MenuHeader />
           <main className="container" style={{"paddingTop": "20px"}}>
-            <h1 className="my-4">Gasolineras en {this.state.province.toUpperCase()}
-            </h1>
-            {this._renderResults()}
+            {this.state.province !== ''
+              ? <div>
+                  {this._renderResults()}
+                  <ButtonBackToHome/>
+                </div>
+              : <div className="spinner">
+                  <Loader
+                     type="Puff"
+                     color="#00BFFF"
+                     height={100}
+                     width={100}
+                     timeout={5000} //5 secs
+
+                  />
+                </div>
+            }
           </main>
-          <ButtonBackToHome/>
         </div>
         <Footer/>
       </div>

@@ -6,6 +6,7 @@ import {MenuHeader} from '../components/MenuHeader'
 import {Footer} from '../components/Footer'
 import {Config} from '../configuration'
 import {GasStationMap} from '../components/GasStationsMap'
+import Loader from 'react-loader-spinner'
 
 const URL_API_DETAIL = Config.apiDetailUrl
 
@@ -19,7 +20,7 @@ export class Detail extends Component {
     })
   }
 
-  state = { gas_station: {} }
+  state = { gas_station: {}, usedSearch: false }
 
   _fetchGasStation ({ id }) {
     console.log("-----  " + id)
@@ -27,9 +28,10 @@ export class Detail extends Component {
       .then(res => res.json())
       .then(gas_station => {
         //console.log({ gas_station })
-        this.setState({ gas_station })
+        this.setState({ gas_station: gas_station, usedSearch: true })
       }).catch(err => {
-          console.log("Not found! \n\n"+err);
+        this.setState({ usedSearch: true })
+        console.log("Not found! \n\n"+err);
       });
   }
 
@@ -92,7 +94,21 @@ export class Detail extends Component {
         <div className="wrapper flex-grow-1">
           <MenuHeader />
           <main className="container" style={{"paddingTop": "20px"}}>
-            {this._renderResults()}
+            {this.state.usedSearch
+              ? <div>
+                  {this._renderResults()}
+                </div>
+              : <div className="spinner">
+                  <Loader
+                     type="Puff"
+                     color="#00BFFF"
+                     height={100}
+                     width={100}
+                     timeout={5000} //5 secs
+
+                  />
+                </div>
+            }
           </main>
 
         </div>
