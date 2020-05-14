@@ -35,6 +35,8 @@ export class Detail extends Component {
     const { label, location, ideess } = this.props.match.params
     console.log(label + " " + location)
     this._fetchGasStation({id: ideess})
+    document.title = `Precios carburantes en la Gasolinera ${this.state.gas_station.label} de ${this.state.gas_station.location}`
+    document.description = `Gasolinera ${this.state.gas_station.label} de ${this.state.gas_station.location}. Esta gasolinera se encuentra en la localidad de ${this.state.gas_station.location}, en el municipio de ${this.state.gas_station.municipality} perteneciente a la provincia de ${this.state.gas_station.province}`
   }
 
   render () {
