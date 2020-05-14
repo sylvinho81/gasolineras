@@ -200,6 +200,9 @@ small.last_update{
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
 }
+.GasStationsList-item a:hover {
+  color: grey;
+}
 
 .back-button {
     text-align: center;
