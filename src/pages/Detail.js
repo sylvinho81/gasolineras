@@ -53,7 +53,7 @@ export class Detail extends Component {
               <div className="col-md-8">
                 <GasStationMap key="map-detail"
                   markers={[this.state.gas_station]}
-                  center={{lat: this.state.gas_station.latitude, lng: this.state.gas_station.longitude}}
+                  center={{lat: parseFloat(this.state.gas_station.latitude), lng: parseFloat(this.state.gas_station.longitude)}}
                   zoom={14}
                  />
               </div>
