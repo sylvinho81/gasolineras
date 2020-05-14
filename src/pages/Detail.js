@@ -25,7 +25,7 @@ export class Detail extends Component {
     fetch(`${URL_API_DETAIL}${id}`)
       .then(res => res.json())
       .then(gas_station => {
-        console.log({ gas_station })
+        //console.log({ gas_station })
         this.setState({ gas_station })
       })
   }
