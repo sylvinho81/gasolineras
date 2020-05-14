@@ -75,6 +75,8 @@ export class Province extends Component {
       </div>
   }
 
+  scrollToContainerRef = () => window.scrollTo(0, this.containerRef.offsetTop)
+
   componentDidMount () {
     //console.log(this.props)
     const { province } = this.props.match.params
@@ -82,9 +84,11 @@ export class Province extends Component {
     this._fetchGasStation(province, this.state.currentPageNumber)
   }
 
+
   componentDidUpdate() {
     document.title = `Precios carburantes en las Gasolineras de la provincia de ${this.state.province}`
     document.getElementsByTagName("META")[3].content = `Mejores precios de carburante en la provincia de ${this.state.province}. Si buscas los precios más económicos a la hora de repostar tu vehículo esta es tu página`
+    this.scrollToContainerRef()
   }
 
   render () {
