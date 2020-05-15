@@ -31,7 +31,7 @@ export class GasStation extends Component {
     const locationLowerCase = location.toLowerCase()
     const listItems = type_gas.map((price,i) => {
       if (price &&  price.trim() !== "") {
-        return <li className="list-group-item" key={title_gas[i]}>{title_gas[i]}: {price}€</li>
+        return <li className="list-group-item" key={title_gas[i]}>{title_gas[i]}: {price}€/l</li>
       } else {
         return <li className="list-group-item" key={title_gas[i]}>{title_gas[i]}: - </li>
       }
