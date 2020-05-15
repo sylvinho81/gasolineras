@@ -8,5 +8,4 @@ export const Config = {
   apiKeyGeo: "",
   latMadrid: 40.416729,
   longMadrid: -3.703339
-
 };
