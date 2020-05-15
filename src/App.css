@@ -195,3 +195,16 @@ body > .container {
 small.last_update{
   font-size: 75% !important;
 }
+
+.GasStationsList-item a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+.GasStationsList-item a:hover {
+  background-color: rgba(255,255,255,0.5);
+}
+
+.back-button {
+    text-align: center;
+    padding-bottom: 2em;
+}

@@ -13,7 +13,7 @@ const URL_API_INDEX = Config.apiIndexUrl
 const URL_API_SEARCH = Config.apiSearchUrl
 const LATITUDE_MADRID = Config.latMadrid
 const LONGITUDE_MADRID= Config.longMadrid
-const API_KEY_GEO = Config.apiKeyGeo
+//const API_KEY_GEO = Config.apiKeyGeo
 
 export class Home extends Component {
   constructor(props) {
@@ -56,32 +56,44 @@ export class Home extends Component {
   };
 
 
+
   _renderResults () {
-    return this.state.results.length === 0
-      ? <div>
+    const listResults = (this.state.results.length === 0) ?
+      <div className="row">
+        <div className="col-md-12">
           <p>Lo sentimos! No se encontraron resultados!</p>
-        </div>
-      :
-       <div ref={this.containerRef}>
-         <GasStationMap
-           markers={this.state.results}
-           center={{lat: this.state.latitude, lng: this.state.longitude}}
-          />
-          <GasStationsList gas_stations={this.state.results} />
-          <ReactPaginate
-              previousLabel={"<<"}
-              nextLabel={">>"}
-              breakLabel={"..."}
-              breakClassName={"break-me"}
-              pageCount={this.state.totalPages}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={this.handleClick}
-              forcePage={this.state.currentPageNumber}
-              containerClassName={"pagination"}
-              subContainerClassName={"pages pagination"}
-              activeClassName={"active"}/>
+        </div>    
       </div>
+    :
+      <span>
+        <GasStationsList gas_stations={this.state.results} />
+        <ReactPaginate
+            previousLabel={"<<"}
+            nextLabel={">>"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={this.state.totalPages}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handleClick}
+            forcePage={this.state.currentPageNumber}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}/>
+        </span>
+
+
+    return(
+     <div ref={this.containerRef}>
+       <GasStationMap onResultsMap={this._handleResults}
+         markers={this.state.results}
+         center={{lat: this.state.latitude, lng: this.state.longitude}}
+         zoom={12}
+         viewPage={"home"}
+        />
+        {listResults}
+     </div>
+   )
   }
 
   _searchByCoordinates(latitude, longitude, page) {
@@ -120,24 +132,25 @@ export class Home extends Component {
 
 
   tryAPIGeolocation = () => {
-    fetch("https://api.ipify.org/?format=json")
-     .then(response => response.json())
-     .then(data => {
-       console.log("API IP success" + data.ip)
-       fetch("http://api.ipstack.com/" + data.ip + "?access_key="+ API_KEY_GEO)
-          .then(response => response.json())
-          .then(data => {
-            console.log("API Geolocation success " + data.latitude + " " + data.longitude)
-            this._searchByCoordinates(data.latitude, data.longitude, this.state.currentPageNumber)
-          })
-       .catch(err => {
-          console.log("API Geolocation error! \n\n"+err);
-          this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
-       });
-     }).catch(err => {
-        console.log("API IP error! \n\n"+err);
-        this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
-     });
+    this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+    // fetch("https://api.ipify.org/?format=json")
+    //  .then(response => response.json())
+    //  .then(data => {
+    //    console.log("API IP success" + data.ip)
+    //    fetch("http://api.ipstack.com/" + data.ip + "?access_key="+ API_KEY_GEO)
+    //       .then(response => response.json())
+    //       .then(data => {
+    //         console.log("API Geolocation success " + data.latitude + " " + data.longitude)
+    //         this._searchByCoordinates(data.latitude, data.longitude, this.state.currentPageNumber)
+    //       })
+    //    .catch(err => {
+    //       console.log("API Geolocation error! \n\n"+err);
+    //       this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+    //    });
+    //  }).catch(err => {
+    //     console.log("API IP error! \n\n"+err);
+    //     this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+    //  });
 
   }
 

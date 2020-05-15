@@ -17,9 +17,10 @@ export class GasStationsList extends Component {
             return (
               <div key={gas_station.ideess} className='GasStationsList-item col-lg-3 mb-3 grid-margin'>
                 <GasStation
+                  address={gas_station.address}
                   ideess={gas_station.ideess}
                   label={gas_station.label}
-                  address={gas_station.address}
+                  location={gas_station.location}
                   price_diesel_a={gas_station.price_diesel_a}
                   price_diesel_b={gas_station.price_diesel_b}
                   price_gasoline_95_protection={gas_station.price_gasoline_95_protection}
