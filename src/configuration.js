@@ -7,6 +7,6 @@ export const Config = {
   apiKey: "",
   apiKeyGeo: "",
   latMadrid: 40.416729,
-  longMadrid: -3.703339
-
+  longMadrid: -3.703339,
+  selectedRadioByDefault: 'all'
 };

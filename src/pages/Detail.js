@@ -55,6 +55,7 @@ export class Detail extends Component {
               center={{lat: parseFloat(this.state.gas_station.latitude), lng: parseFloat(this.state.gas_station.longitude)}}
               zoom={14}
               viewPage={"detail"}
+              selectedRadio={"all"}
              />
           </div>
 

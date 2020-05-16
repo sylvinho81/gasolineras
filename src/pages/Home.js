@@ -13,6 +13,8 @@ const URL_API_INDEX = Config.apiIndexUrl
 const URL_API_SEARCH = Config.apiSearchUrl
 const LATITUDE_MADRID = Config.latMadrid
 const LONGITUDE_MADRID= Config.longMadrid
+const SELECTED_RADIO_BY_DEFAULT= Config.selectedRadioByDefault
+
 //const API_KEY_GEO = Config.apiKeyGeo
 
 export class Home extends Component {
@@ -24,15 +26,17 @@ export class Home extends Component {
               currentPageNumber: 0,
               totalPages: 1,
               inputSearch: '',
-              latitude: 0,
-              longitude: 0,
-              typeSearch: 'normal'
+              latitude: LATITUDE_MADRID,
+              longitude: LONGITUDE_MADRID,
+              typeSearch: 'normal',
+              selectedRadio: SELECTED_RADIO_BY_DEFAULT
 
     };
     this.containerRef = React.createRef()
   }
 
   _handleResults = (results) => {
+    console.log("results " + results.type_fuel)
     this.setState({ results: results.gas_stations,
                     usedSearch: true,
                     initialLoaded:  true,
@@ -41,16 +45,17 @@ export class Home extends Component {
                     inputSearch: results.input_search,
                     latitude: parseFloat(results.latitude),
                     longitude: parseFloat(results.longitude),
-                    typeSearch: results.type_search
+                    typeSearch: results.type_search,
+                    selectedRadio: results.type_fuel
                   })
   }
 
   handleClick = (e) => {
     const selectedPage = e.selected;
     if (this.state.typeSearch === 'coordinates'){
-      this._searchByCoordinates(this.state.latitude, this.state.longitude, selectedPage)
+      this._searchByCoordinates(this.state.latitude, this.state.longitude, selectedPage, this.state.selectedRadio)
     } else {
-      this._searchByText(this.state.inputSearch, selectedPage)
+      this._searchByText(this.state.inputSearch, selectedPage, this.state.selectedRadio)
     }
 
   };
@@ -62,7 +67,7 @@ export class Home extends Component {
       <div className="row">
         <div className="col-md-12">
           <p>Lo sentimos! No se encontraron resultados!</p>
-        </div>    
+        </div>
       </div>
     :
       <span>
@@ -90,14 +95,15 @@ export class Home extends Component {
          center={{lat: this.state.latitude, lng: this.state.longitude}}
          zoom={12}
          viewPage={"home"}
+         selectedRadio={this.state.selectedRadio}
         />
         {listResults}
      </div>
    )
   }
 
-  _searchByCoordinates(latitude, longitude, page) {
-    fetch(`${URL_API_INDEX}?lat=${latitude}&long=${longitude}&page=${page}`)
+  _searchByCoordinates(latitude, longitude, page, selectedRadio) {
+    fetch(`${URL_API_INDEX}?lat=${latitude}&long=${longitude}&page=${page}&radio=${selectedRadio}`)
       .then(res => res.json())
       .then(results => {
         this.setState({ results: results.gas_stations,
@@ -105,16 +111,17 @@ export class Home extends Component {
                         initialLoaded:  true,
                         currentPageNumber: results.page,
                         totalPages: results.pages,
-                        inputSearch: '',
+                        inputSearch: results.inputSearch,
                         latitude: parseFloat(results.latitude),
                         longitude: parseFloat(results.longitude),
-                        typeSearch: results.type_search
+                        typeSearch: results.type_search,
+                        selectedRadio: results.type_fuel
                       })
       })
   }
 
-  _searchByText(inputSearch, page) {
-    fetch(`${URL_API_SEARCH}?q=${inputSearch}&page=${page}`)
+  _searchByText(inputSearch, page, selectedRadio) {
+    fetch(`${URL_API_SEARCH}?q=${inputSearch}&page=${page}&radio=${selectedRadio}`)
       .then(res => res.json())
       .then(results => {
         this.setState({ results: results.gas_stations,
@@ -125,14 +132,17 @@ export class Home extends Component {
                         inputSearch: results.input_search,
                         latitude: parseFloat(results.latitude),
                         longitude: parseFloat(results.longitude),
-                        typeSearch: results.type_search
+                        typeSearch: results.type_search,
+                        selectedRadio: results.type_fuel
                       })
       })
   }
 
 
   tryAPIGeolocation = () => {
-    this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
+    localStorage.removeItem('lat')
+    localStorage.removeItem('long')
+    this._searchByCoordinates(this.state.latitude, this.state.longitude, this.state.currentPageNumber, this.state.selectedRadio)
     // fetch("https://api.ipify.org/?format=json")
     //  .then(response => response.json())
     //  .then(data => {
@@ -162,14 +172,10 @@ export class Home extends Component {
     console.log("Browser geolocation success!\n\nlat = " + position.coords.latitude + "\nlng = " + position.coords.longitude);
     localStorage.setItem('lat', lat)
     localStorage.setItem('long', long)
-    this._searchByCoordinates(localStorage.getItem('lat'), localStorage.getItem('long'), this.state.currentPageNumber)
+    this._searchByCoordinates(localStorage.getItem('lat'), localStorage.getItem('long'), this.state.currentPageNumber,this.state.selectedRadio)
   }
 
   error_pos = (error) => {
-    console.log(error.code)
-    console.log(error.TIMEOUT)
-    console.log(error.PERMISSION_DENIED)
-    console.log(error.POSITION_UNAVAILABLE)
     switch (error.code) {
       case error.TIMEOUT:
         console.log(error.message)
@@ -187,9 +193,6 @@ export class Home extends Component {
         this.tryAPIGeolocation()
         break;
     }
-    //alert("Recuerda dar permisos de geolocalización en tu dispositivo. De lo contrario se mostrarán por defecto las gasolineras de Madrid")
-
-
   }
 
   scrollToContainerRef = () => window.scrollTo(0, this.containerRef.offsetTop)
@@ -211,12 +214,14 @@ export class Home extends Component {
 
   render (){
     console.log("render")
+    console.log(this.state.selectedRadio)
     return (
       <div className="App d-flex flex-column min-vh-100">
         <div className="wrapper flex-grow-1">
           <MenuHeader />
           <main className="container" style={{"paddingTop": "20px"}}>
-            <SearchForm onResults={this._handleResults}/>
+            <SearchForm onResults={this._handleResults} lat={localStorage.getItem('lat') || this.state.latitude} lng={localStorage.getItem('long') || this.state.longitude}/>
+
             {this.state.usedSearch
               ? <div>
                   {this._renderResults()}

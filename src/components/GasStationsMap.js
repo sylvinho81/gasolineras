@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api'
-import pin7 from '../assets/pin7.png'
+import pin_normal from '../assets/pin_normal.png'
+import pin_cheap from '../assets/pin_cheap.png'
 import {ImageGasStation} from './ImageGasStation'
 import {Config} from '../configuration'
 
 const API_KEY = Config.apiKey
 const URL_API_SEARCH = Config.apiSearchUrl
-
+const MAX_NUM_CHEAP_STATIONS = 4
+const SELECTED_RADIO_BY_DEFAULT = Config.selectedRadioByDefault
 const utils = require("../utils.js")
 
 const _renderInfoWindowScreen = (selectedCenter) => (
@@ -32,21 +34,25 @@ const _renderInfoWindowScreen = (selectedCenter) => (
 
 
 export class GasStationMap extends Component {
-
-  state = {
-    selectedCenter: null,
-    centerMap: this.props.center,
-    markers: this.props.markers,
-    zoom: this.props.zoom,
-    viewPage: this.props.viewPage
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedCenter: null,
+      centerMap: props.center,
+      markers: props.markers,
+      zoom: props.zoom,
+      viewPage: props.viewPage,
+      selectedRadio: props.selectedRadio
+    }
   }
+
 
   setSelectedCenter(marker) {
     this.setState({selectedCenter: marker})
   }
 
   _fetchGasStation(latitude, longitude) {
-    const urlApi = `${URL_API_SEARCH}?lat=${latitude}&lon=${longitude}&page=0`
+    const urlApi = `${URL_API_SEARCH}?lat=${latitude}&lon=${longitude}&page=0&radio=${this.state.selectedRadio}`
     fetch(urlApi)
       .then(res => res.json())
       .then(results => {
@@ -81,7 +87,7 @@ export class GasStationMap extends Component {
   }
 
   static getDerivedStateFromProps(props, state){
-    return {centerMap: props.center, markers: props.markers}
+    return {centerMap: props.center, markers: props.markers, selectedRadio: props.selectedRadio}
   }
 
 
@@ -91,6 +97,7 @@ export class GasStationMap extends Component {
   //}
 
   render() {
+     console.log("map")
      return (
       <LoadScript
         id="script-loader"
@@ -102,16 +109,16 @@ export class GasStationMap extends Component {
           center={this.state.centerMap}
           mapContainerClassName={"containerMap"}
           mapContainerStyle={{ height: `100%` }}
-          onDragEnd={this.boundsCallBack}
+          //onDragEnd={this.boundsCallBack}
           onClick={this.handleClickMap}
           onLoad={this.handleMapLoad}
         >
-        {this.state.markers.map(marker => {
+        {this.state.markers.map((marker,index) => {
            return (
              <Marker
                key={marker.ideess}
                position={{ lat: marker.latitude, lng: marker.longitude }}
-               options={{ icon: { url: pin7}}}
+               options={{ icon: { url: this.state.selectedRadio !== SELECTED_RADIO_BY_DEFAULT && index < MAX_NUM_CHEAP_STATIONS ?  pin_cheap : pin_normal}}}
                onClick={() => {
                   this.setSelectedCenter(marker);
                }}
