@@ -15,8 +15,6 @@ const LATITUDE_MADRID = Config.latMadrid
 const LONGITUDE_MADRID= Config.longMadrid
 const SELECTED_RADIO_BY_DEFAULT= Config.selectedRadioByDefault
 
-//const API_KEY_GEO = Config.apiKeyGeo
-
 export class Home extends Component {
   constructor(props) {
     super(props);
@@ -57,7 +55,6 @@ export class Home extends Component {
     } else {
       this._searchByText(this.state.inputSearch, selectedPage, this.state.selectedRadio)
     }
-
   };
 
 
@@ -143,25 +140,6 @@ export class Home extends Component {
     localStorage.removeItem('lat')
     localStorage.removeItem('long')
     this._searchByCoordinates(this.state.latitude, this.state.longitude, this.state.currentPageNumber, this.state.selectedRadio)
-    // fetch("https://api.ipify.org/?format=json")
-    //  .then(response => response.json())
-    //  .then(data => {
-    //    console.log("API IP success" + data.ip)
-    //    fetch("http://api.ipstack.com/" + data.ip + "?access_key="+ API_KEY_GEO)
-    //       .then(response => response.json())
-    //       .then(data => {
-    //         console.log("API Geolocation success " + data.latitude + " " + data.longitude)
-    //         this._searchByCoordinates(data.latitude, data.longitude, this.state.currentPageNumber)
-    //       })
-    //    .catch(err => {
-    //       console.log("API Geolocation error! \n\n"+err);
-    //       this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
-    //    });
-    //  }).catch(err => {
-    //     console.log("API IP error! \n\n"+err);
-    //     this._searchByCoordinates(LATITUDE_MADRID, LONGITUDE_MADRID, this.state.currentPageNumber)
-    //  });
-
   }
 
 
@@ -176,23 +154,8 @@ export class Home extends Component {
   }
 
   error_pos = (error) => {
-    switch (error.code) {
-      case error.TIMEOUT:
-        console.log(error.message)
-        this.tryAPIGeolocation()
-        break;
-      case error.PERMISSION_DENIED:
-        console.log(error.message)
-        this.tryAPIGeolocation()
-        break;
-      case error.POSITION_UNAVAILABLE:
-        console.log(error.message)
-        this.tryAPIGeolocation()
-        break;
-      default:
-        this.tryAPIGeolocation()
-        break;
-    }
+    console.log(error.message)
+    this.tryAPIGeolocation()
   }
 
   scrollToContainerRef = () => window.scrollTo(0, this.containerRef.offsetTop)
@@ -202,7 +165,6 @@ export class Home extends Component {
       var geoOptions = { enableHighAccuracy:true, maximumAge : 50000, timeout: 20000 }
       navigator.geolocation.getCurrentPosition(this.show_pos, this.error_pos, geoOptions)
     }
-
   }
 
 
@@ -233,7 +195,6 @@ export class Home extends Component {
                      height={100}
                      width={100}
                      timeout={5000} //5 secs
-
                   />
                 </div>
             }
@@ -241,7 +202,6 @@ export class Home extends Component {
         </div>
         <Footer/>
       </div>
-
     )
   }
 
