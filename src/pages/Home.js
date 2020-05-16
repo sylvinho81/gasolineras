@@ -34,7 +34,6 @@ export class Home extends Component {
   }
 
   _handleResults = (results) => {
-    console.log("results " + results.type_fuel)
     this.setState({ results: results.gas_stations,
                     usedSearch: true,
                     initialLoaded:  true,
@@ -175,8 +174,6 @@ export class Home extends Component {
 
 
   render (){
-    console.log("render")
-    console.log(this.state.selectedRadio)
     return (
       <div className="App d-flex flex-column min-vh-100">
         <div className="wrapper flex-grow-1">
