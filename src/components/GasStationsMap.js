@@ -24,7 +24,7 @@ const _renderInfoWindowScreen = (selectedCenter) => (
      <p>{selectedCenter.address}, {selectedCenter.location}</p>
      <ul className="list-group list-group-flush">
        {selectedCenter.price_diesel_a !== null ? <li className="list-group-item" key={"price_diesel_a"}><b>Diesel A:</b> {selectedCenter.price_diesel_a} €/l</li> : ''}
-       {selectedCenter.price_new_diesel_a !== null ? <li className="list-group-item" key={"price_new_diesel_a"}><b>Diesel A+ (Premium):</b> {selectedCenter.price_new_diesel_a} €/l</li> : ''}
+       {selectedCenter.price_new_diesel_a !== null ? <li className="list-group-item" key={"price_new_diesel_a"}><b>Diesel A+ (Plus):</b> {selectedCenter.price_new_diesel_a} €/l</li> : ''}
        {selectedCenter.price_diesel_b !== null ? <li className="list-group-item" key={"price_diesel_b"}><b>Diesel B:</b> {selectedCenter.price_diesel_b} €/l</li> : ''}
        {selectedCenter.price_gasoline_95_protection !== null ? <li className="list-group-item" key={"price_gasolina_95"}><b>Gasolina 95:</b> {selectedCenter.price_gasoline_95_protection} €/l</li> : ''}
        {selectedCenter.price_gasoline_98 !== null ? <li className="list-group-item" key={"price_gasolina_98"}><b>Gasolina 98:</b> {selectedCenter.price_gasoline_98} €/l</li> : ''}
