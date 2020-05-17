@@ -7,6 +7,7 @@ import {Footer} from '../components/Footer'
 import {Config} from '../configuration'
 import {GasStationMap} from '../components/GasStationsMap'
 import Loader from 'react-loader-spinner'
+const utils = require("../utils.js")
 
 const URL_API_DETAIL = Config.apiDetailUrl
 
@@ -60,6 +61,7 @@ export class Detail extends Component {
           </div>
 
           <div className="col-md-4">
+            <small className="last_update">Última actualización: {utils.formatDate(this.state.gas_station.updated_at)}</small>
             <h3 className="my-3">Horario y Dirección</h3>
             <p><b>Horario:</b> {this.state.gas_station.schedule}</p>
             <p><b>Dirección:</b> {this.state.gas_station.address}, {this.state.gas_station.location}, {this.state.gas_station.cp}</p>
