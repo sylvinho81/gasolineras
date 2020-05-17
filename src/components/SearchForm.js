@@ -75,7 +75,7 @@ export class SearchForm extends Component {
               <FormControlLabel value="price_gasoline_95_protection" control={<Radio />} label="Gasolina 95" onChange={this._handleChange} checked={selectedRadio === 'price_gasoline_95_protection'}/>
               <FormControlLabel value="price_gasoline_98" control={<Radio />} label="Gasolina 98" onChange={this._handleChange} checked={selectedRadio === 'price_gasoline_98'}/>
               <FormControlLabel value="price_diesel_a" control={<Radio />} label="Diesel A" onChange={this._handleChange} checked={selectedRadio === 'price_diesel_a'}/>
-              <FormControlLabel value="price_new_diesel_a" control={<Radio />} label="Diesel+" onChange={this._handleChange} checked={selectedRadio === 'price_new_diesel_a'}/>
+              <FormControlLabel value="price_new_diesel_a" control={<Radio />} label="Diesel A+" onChange={this._handleChange} checked={selectedRadio === 'price_new_diesel_a'}/>
               <FormControlLabel value="price_diesel_b" control={<Radio />} label="Diesel B" onChange={this._handleChange} checked={selectedRadio === 'price_diesel_b'}/>
             </div>
           </div>
