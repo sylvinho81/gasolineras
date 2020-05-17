@@ -6,7 +6,7 @@ export const NotFound = () => (
   <div className="App d-flex flex-column min-vh-100">
     <div className="wrapper flex-grow-1">
       <MenuHeader />
-      <main className="container" style={{"paddingTop": "20px"}}>
+      <main className="container" style={{"paddingTop": "50px"}}>
         <div className="row">
             <div className="col-md-12">
                 <div className="error-template">
