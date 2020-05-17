@@ -27,7 +27,7 @@ export class GasStation extends Component {
   render () {
     const { address, ideess, label, location, price_diesel_a, price_new_diesel_a, price_diesel_b,price_gasoline_95_protection, price_gasoline_98, updated_at } = this.props
     const type_gas = [price_diesel_a, price_new_diesel_a,price_diesel_b,price_gasoline_95_protection, price_gasoline_98];
-    const title_gas = ["Diesel A", "Diesel A+ (Plus)", "Diesel B", "Gasolina 95", "Gasolina 98"];
+    const title_gas = ["Diesel A", "Diesel A+ (Plus)", "Gasóleo B", "Gasolina 95", "Gasolina 98"];
     const labelLowerCase = label.toLowerCase()
     const locationLowerCase = location.toLowerCase()
     const listItems = type_gas.map((price,i) => {
