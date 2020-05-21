@@ -4,7 +4,7 @@ export const Config = {
   apiAutocompleteUrl: 'https://gasolineras-spain-api.herokuapp.com/gas_stations/autocomplete',
   apiDetailUrl: 'https://gasolineras-spain-api.herokuapp.com/gas_stations/',
   apiProvinceUrl: 'https://gasolineras-spain-api.herokuapp.com/gas_stations/by_province/',
-  apiKey: "AIzaSyB327EyMsDVaofHcXEprKGBedaBY0_9W20",
+  apiKey: "AIzaSyBqwOPZmXqQK-FTD-TZWPuDF_NfJErJbOk",
   latMadrid: 40.416729,
   longMadrid: -3.703339,
   selectedRadioByDefault: 'all'
