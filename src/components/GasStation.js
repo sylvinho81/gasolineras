@@ -13,9 +13,12 @@ export class GasStation extends Component {
     location: PropTypes.string,
     price_diesel_a: PropTypes.string,
     price_diesel_b: PropTypes.string,
-    price_new_diesel_a: PropTypes.string,
-    price_gasoline_95_protection: PropTypes.string,
-    price_gasoline_98: PropTypes.string
+    price_diesel_premium: PropTypes.string,
+    price_gasoline_95_e10: PropTypes.string,
+    price_gasoline_95_e5: PropTypes.string,
+    price_gasoline_95_e5_premium: PropTypes.string,
+    price_gasoline_98_e10: PropTypes.string,
+    price_gasoline_98_e5: PropTypes.string
   }
 
   _formatAddress(address) {
@@ -25,9 +28,9 @@ export class GasStation extends Component {
 
 
   render () {
-    const { address, ideess, label, location, price_diesel_a, price_new_diesel_a, price_diesel_b,price_gasoline_95_protection, price_gasoline_98, updated_at } = this.props
-    const type_gas = [price_diesel_a, price_new_diesel_a,price_diesel_b,price_gasoline_95_protection, price_gasoline_98];
-    const title_gas = ["Diesel A", "Diesel A+ (Plus)", "Gasóleo B", "Gasolina 95", "Gasolina 98"];
+    const { address, ideess, label, location, price_diesel_a, price_diesel_premium,price_diesel_b,price_gasoline_95_e10, price_gasoline_95_e5,price_gasoline_95_e5_premium,price_gasoline_98_e10,price_gasoline_98_e5, updated_at } = this.props
+    const type_gas = [price_diesel_a, price_diesel_premium,price_diesel_b,price_gasoline_95_e10, price_gasoline_95_e5,price_gasoline_95_e5_premium,price_gasoline_98_e10,price_gasoline_98_e5];
+    const title_gas = ["Diesel A", "Diesel Premium", "Gasóleo B", "Gasolina 95 E10", "Gasolina 95 E5", "Gasolina 95 E5 Premium", "Gasolina 98 E10", "Gasolina 98 E5"];
     const labelLowerCase = label.toLowerCase()
     const locationLowerCase = location.toLowerCase()
     const listItems = type_gas.map((price,i) => {

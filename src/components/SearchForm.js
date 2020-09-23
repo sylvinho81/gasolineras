@@ -72,10 +72,12 @@ export class SearchForm extends Component {
             />
             <div>
               <FormControlLabel value="all" control={<Radio />} label="Todos" onChange={this._handleChange} checked={selectedRadio === SELECTED_RADIO_BY_DEFAULT} />
-              <FormControlLabel value="price_gasoline_95_protection" control={<Radio />} label="Gasolina 95" onChange={this._handleChange} checked={selectedRadio === 'price_gasoline_95_protection'}/>
-              <FormControlLabel value="price_gasoline_98" control={<Radio />} label="Gasolina 98" onChange={this._handleChange} checked={selectedRadio === 'price_gasoline_98'}/>
+              <FormControlLabel value="price_gasoline_95_e10" control={<Radio />} label="Gasolina 95 E10" onChange={this._handleChange} checked={selectedRadio === 'price_gasoline_95_e10'}/>
+              <FormControlLabel value="price_gasoline_98_e10" control={<Radio />} label="Gasolina 98 E10" onChange={this._handleChange} checked={selectedRadio === 'price_gasoline_98_e10'}/>
+              <FormControlLabel value="price_gasoline_95_e5" control={<Radio />} label="Gasolina 95 E5" onChange={this._handleChange} checked={selectedRadio === 'price_gasoline_95_e5'}/>
+              <FormControlLabel value="price_gasoline_98_e5" control={<Radio />} label="Gasolina 98 E5" onChange={this._handleChange} checked={selectedRadio === 'price_gasoline_98_e5'}/>
               <FormControlLabel value="price_diesel_a" control={<Radio />} label="Diesel A" onChange={this._handleChange} checked={selectedRadio === 'price_diesel_a'}/>
-              <FormControlLabel value="price_new_diesel_a" control={<Radio />} label="Diesel A+" onChange={this._handleChange} checked={selectedRadio === 'price_new_diesel_a'}/>
+              <FormControlLabel value="price_diesel_premium" control={<Radio />} label="Diesel Premium" onChange={this._handleChange} checked={selectedRadio === 'price_diesel_premium'}/>
               <FormControlLabel value="price_diesel_b" control={<Radio />} label="Gasóleo B" onChange={this._handleChange} checked={selectedRadio === 'price_diesel_b'}/>
             </div>
           </div>

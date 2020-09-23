@@ -24,10 +24,14 @@ const _renderInfoWindowScreen = (selectedCenter) => (
      <p>{selectedCenter.address}, {selectedCenter.location}</p>
      <ul className="list-group list-group-flush">
        {selectedCenter.price_diesel_a !== null ? <li className="list-group-item" key={"price_diesel_a"}><b>Diesel A:</b> {selectedCenter.price_diesel_a} €/l</li> : ''}
-       {selectedCenter.price_new_diesel_a !== null ? <li className="list-group-item" key={"price_new_diesel_a"}><b>Diesel A+ (Plus):</b> {selectedCenter.price_new_diesel_a} €/l</li> : ''}
+       {selectedCenter.price_diesel_premium !== null ? <li className="list-group-item" key={"price_diesel_premium"}><b>Diesel Premium:</b> {selectedCenter.price_diesel_premium} €/l</li> : ''}
        {selectedCenter.price_diesel_b !== null ? <li className="list-group-item" key={"price_diesel_b"}><b>Gasóleo B:</b> {selectedCenter.price_diesel_b} €/l</li> : ''}
-       {selectedCenter.price_gasoline_95_protection !== null ? <li className="list-group-item" key={"price_gasolina_95"}><b>Gasolina 95:</b> {selectedCenter.price_gasoline_95_protection} €/l</li> : ''}
-       {selectedCenter.price_gasoline_98 !== null ? <li className="list-group-item" key={"price_gasolina_98"}><b>Gasolina 98:</b> {selectedCenter.price_gasoline_98} €/l</li> : ''}
+       {selectedCenter.price_gasoline_95_e10 !== null ? <li className="list-group-item" key={"price_gasoline_95_e10"}><b>Gasolina 95 E10:</b> {selectedCenter.price_gasoline_95_e10} €/l</li> : ''}
+       {selectedCenter.price_gasoline_95_e5 !== null ? <li className="list-group-item" key={"price_gasoline_95_e5"}><b>Gasolina 95 E5:</b> {selectedCenter.price_gasoline_95_e5} €/l</li> : ''}
+       {selectedCenter.price_gasoline_95_e5_premium !== null ? <li className="list-group-item" key={"price_gasoline_95_e5_premium"}><b>Gasolina 95 E5 Premium:</b> {selectedCenter.price_gasoline_95_e5_premium} €/l</li> : ''}
+       {selectedCenter.price_gasoline_98_e10 !== null ? <li className="list-group-item" key={"price_gasoline_98_e10"}><b>Gasolina 98 E10:</b> {selectedCenter.price_gasoline_98_e10} €/l</li> : ''}
+       {selectedCenter.price_gasoline_98_e5 !== null ? <li className="list-group-item" key={"price_gasoline_98_e5"}><b>Gasolina 98 E5:</b> {selectedCenter.price_gasoline_98_e5} €/l</li> : ''}
+
      </ul>
     </div>
   </div>

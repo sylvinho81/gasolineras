@@ -22,10 +22,13 @@ export class GasStationsList extends Component {
                   label={gas_station.label}
                   location={gas_station.location}
                   price_diesel_a={gas_station.price_diesel_a}
-                  price_new_diesel_a={gas_station.price_new_diesel_a}
+                  price_diesel_premium={gas_station.price_diesel_premium}
                   price_diesel_b={gas_station.price_diesel_b}
-                  price_gasoline_95_protection={gas_station.price_gasoline_95_protection}
-                  price_gasoline_98={gas_station.price_gasoline_98}
+                  price_gasoline_95_e10={gas_station.price_gasoline_95_e10}
+                  price_gasoline_95_e5={gas_station.price_gasoline_95_e5}
+                  price_gasoline_95_e5_premium={gas_station.price_gasoline_95_e5_premium}
+                  price_gasoline_98_e10={gas_station.price_gasoline_98_e10}
+                  price_gasoline_98_e5={gas_station.price_gasoline_98_e5}
                   updated_at={gas_station.updated_at}
                 />
               </div>
