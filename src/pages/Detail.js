@@ -68,10 +68,14 @@ export class Detail extends Component {
             <h3 className="my-3">Precios Carburantes</h3>
             <ul className="list-group list-group-flush">
               <li key="Diesel A" className="list-group-item">Diesel A: {this.state.gas_station.price_diesel_a &&  this.state.gas_station.price_diesel_a.trim() !== "" ? this.state.gas_station.price_diesel_a + " €/l" : '-'}</li>
-              <li key="Diesel+" className="list-group-item">Diesel A+ (Plus): {this.state.gas_station.price_new_diesel_a &&  this.state.gas_station.price_new_diesel_a.trim() !== "" ? this.state.gas_station.price_new_diesel_a + " €/l" : '-'}</li>
+              <li key="Diesel+" className="list-group-item">Diesel A+ (Plus): {this.state.gas_station.price_diesel_premium &&  this.state.gas_station.price_diesel_premium.trim() !== "" ? this.state.gas_station.price_diesel_premium + " €/l" : '-'}</li>
               <li key="Diesel B" className="list-group-item">Gasóleo B: {this.state.gas_station.price_diesel_b &&  this.state.gas_station.price_diesel_b.trim() !== "" ? this.state.gas_station.price_diesel_b + " €/l" : '-'}</li>
-              <li key="Gasolina 95" className="list-group-item">Gasolina 95: {this.state.gas_station.price_gasoline_95_protection &&  this.state.gas_station.price_gasoline_95_protection.trim() !== "" ? this.state.gas_station.price_gasoline_95_protection + " €/l" : '-'}</li>
-              <li key="Gasolina 98" className="list-group-item">Gasolina 98: {this.state.gas_station.price_gasoline_98 &&  this.state.gas_station.price_gasoline_98.trim() !== "" ? this.state.gas_station.price_gasoline_98 + " €/l" : '-'}</li>
+              <li key="Gasolina 95 E5" className="list-group-item">Gasolina 95 E5: {this.state.gas_station.price_gasoline_95_e5 &&  this.state.gas_station.price_gasoline_95_e5.trim() !== "" ? this.state.gas_station.price_gasoline_95_e5 + " €/l" : '-'}</li>
+              <li key="Gasolina 98 E5" className="list-group-item">Gasolina 98 E5: {this.state.gas_station.price_gasoline_98_e5 &&  this.state.gas_station.price_gasoline_98_e5.trim() !== "" ? this.state.gas_station.price_gasoline_98_e5 + " €/l" : '-'}</li>
+              <li key="Gasolina 95 E10" className="list-group-item">Gasolina 95 E5: {this.state.gas_station.price_gasoline_95_e10 &&  this.state.gas_station.price_gasoline_95_e10.trim() !== "" ? this.state.gas_station.price_gasoline_95_e10 + " €/l" : '-'}</li>
+              <li key="Gasolina 98 E10" className="list-group-item">Gasolina 98 E10: {this.state.gas_station.price_gasoline_98_e10 &&  this.state.gas_station.price_gasoline_98_e10.trim() !== "" ? this.state.gas_station.price_gasoline_98_e10 + " €/l" : '-'}</li>
+              <li key="Gasolina 95 E5 Premium" className="list-group-item">Gasolina 95 E5 Premium: {this.state.gas_station.price_gasoline_95_e5_premium &&  this.state.gas_station.price_gasoline_95_e5_premium.trim() !== "" ? this.state.gas_station.price_gasoline_95_e5_premium + " €/l" : '-'}</li>
+
             </ul>
             <br/>
             <ButtonBackToHome/>
